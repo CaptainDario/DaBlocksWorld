@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+
+gcc -std=c11 -fPIC -c -I ../godot_headers -I ../clingo/libclingo simple.c -o simple.os
+gcc -shared simple.os -o ../libClingo.so
+
