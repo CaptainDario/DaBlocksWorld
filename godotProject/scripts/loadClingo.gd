@@ -18,4 +18,3 @@ func _ready():
 func _on_Button_pressed():
 	var text = "Data = " + data.get_data()
 	$Label.text = text
-	print("asdas", text)
