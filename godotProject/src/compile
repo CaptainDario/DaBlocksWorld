@@ -2,6 +2,6 @@
 
 
 
-gcc -std=c11 -fPIC -c -I ../godot_headers -I ../clingo/libclingo simple.c -o simple.os
-gcc -shared simple.os -o ../libClingo.so
+gcc -std=c11 -fPIC -c -I godot_headers -I clingo/libclingo simple.c -o simple.os
+gcc -shared simple.os -o ./clingo/build/bin/libclingo.so -o ../bin/libsimple.so
 
