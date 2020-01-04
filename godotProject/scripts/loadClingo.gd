@@ -1,7 +1,7 @@
 extends Control
 
 # load the Simple library
-onready var data = preload("res://bin/simple.gdns").new()
+#onready var data = preload("res://src/clingoTest.gdns").new()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,5 +16,6 @@ func _ready():
 
 
 func _on_Button_pressed():
-	var text = "Data = " + data.get_data()
-	$Label.text = text
+	pass
+	#var text = "Data = " + data.get_data()
+	#$Label.text = text
