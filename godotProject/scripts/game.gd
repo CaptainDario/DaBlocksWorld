@@ -5,14 +5,11 @@ extends Spatial
 onready var block = preload("res://scenes/block.tscn")
 
 #the block
-var s
+var block_inst
 
 
 func _ready():
 
-	s = block.instance()
-	add_child(s)
+	block_inst = block.instance()
+	add_child(block_inst)
 
-
-func _process(delta):
-	position += Vector2(0, 1)
