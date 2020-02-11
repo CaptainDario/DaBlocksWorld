@@ -30,13 +30,15 @@ func _ready():
 	#GET RANDOM BLOCKS AND COORDINATES
 
 
+
 	#instantiate the random blocks
 	for y in range(5):
 		#instantiate the block 
 		var block_inst = block.instance()
+		block_inst.set("currentPosition", Vector3(0, y, 0))
 		add_child(block_inst)
 		block_inst.translate(Vector3(0, y * 2, 0))
-		board[0][y] = 1
+		board[0][y] = y + 1
 
 		#add the block to the list with all blocks
 		blocks.append([y, block_inst])

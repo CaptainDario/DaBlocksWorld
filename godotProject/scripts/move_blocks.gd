@@ -15,14 +15,19 @@ var boardLengthX
 #maximum height of the board
 var maxHeight
 
+#the current position of this block
+var currentPosition
+
 
 
 func _ready():
 	camera = get_viewport().get_camera()
+	
 	GM = get_node("/root/GM")
 	board = GM.get("board")
 	boardLengthX = GM.get("boardLength")
 	maxHeight = GM.get("maxHeight")
+
 
 func _input_event(camera, event, click_position, click_normal, shape_idx):
 	#get the position if the cube was clicked
@@ -43,7 +48,8 @@ func _input(event):
 				isDragging = false
 				#set rigidbody back to active
 				self.sleeping = false
-
+				#apply gravity to this block
+				applyGravity()
 
 func _physics_process(delta):
 
@@ -63,20 +69,51 @@ func _physics_process(delta):
 			
 			#check that the new position is not out of the bounds
 			if(not(-1 < y and y < maxHeight)):
-				y = self.translation.y
+				y = currentPosition[1]
 			if(not (-1 < x and x < boardLengthX * 2)):
-				self.translation.x
+				x = currentPosition[0]
 			position3D = Vector3(x, y, z)
 				
 			#only move if the new position is not the same as before
 			#and on the new position is no block
 			if(position3D != self.translation and
 				board[position3D.x][position3D.y] == 0):
-				#set the new value in the board matrix (and remove old)
-				board[self.translation.x][self.translation.y] = 0
-				board[x][y] = 1
 
-				#set the cube to the (rounded) mouse position
-				var t = get_transform()
-				t.origin = position3D
-				set_transform(t)
+				moveBlock(position3D)
+
+
+func moveBlock(newPos : Vector3):
+	"""
+	Moves this block to the coordinates specified
+
+	Args:
+		newPos - the position where this block should be moved to
+	"""
+
+	#set the new value in the board matrix (and remove old)
+	var tmpVal = board[self.currentPosition.x][self.currentPosition.y]
+	board[self.currentPosition.x][self.currentPosition.y] = 0
+	board[newPos.x][newPos.y] = tmpVal
+
+	#set the cube to the (rounded) mouse position
+	var t = get_transform()
+	t.origin = newPos
+	set_transform(t)
+	
+	currentPosition = newPos
+
+func applyGravity():
+	"""
+	Apply gravity to this block
+	"""
+	var moved = true
+
+	while moved:
+		moved = false
+		#if directly below this block there is no other block
+		if(board[currentPosition.x][currentPosition.y - 1] == 0
+			and currentPosition.y > 0):
+			#move the block down one field
+			moveBlock(currentPosition - Vector3(0, 1, 0))
+			moved = true
+
