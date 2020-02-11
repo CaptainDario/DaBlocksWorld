@@ -10,6 +10,8 @@ var z = 0
 var camera
 #the board matrix from the tree root
 var board
+#all other blocks
+var blocks
 #the length of the board
 var boardLengthX
 #maximum height of the board
@@ -25,6 +27,7 @@ func _ready():
 	
 	GM = get_node("/root/GM")
 	board = GM.get("board")
+	blocks = GM.get("blocks")
 	boardLengthX = GM.get("boardLength")
 	maxHeight = GM.get("maxHeight")
 
@@ -115,5 +118,8 @@ func applyGravity():
 			and currentPosition.y > 0):
 			#move the block down one field
 			moveBlock(currentPosition - Vector3(0, 1, 0))
+			#because this block has been moved try to apply gravity to all other
+			for block in blocks:
+				block[1].applyGravity()
 			moved = true
 
