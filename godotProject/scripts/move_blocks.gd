@@ -10,15 +10,17 @@ var z = 0
 var camera
 #the board matrix from the tree root
 var board
+var goalBoard
 #all other blocks
 var blocks
 #the length of the board
 var boardLengthX
 #maximum height of the board
 var maxHeight
-
 #the current position of this block
 var currentPosition
+#the block number (the number which is written infront of it)
+var number
 
 
 
@@ -27,6 +29,7 @@ func _ready():
 	
 	GM = get_node("/root/GM")
 	board = GM.get("board")
+	goalBoard = GM.get("goalBoard")
 	blocks = GM.get("blocks")
 	boardLengthX = GM.get("boardLength")
 	maxHeight = GM.get("maxHeight")
@@ -37,10 +40,12 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
-				#print(click_position)
-				isDragging = true
-				#disable gravity
-				self.sleeping = true
+				#only move the cube if there is no block above it 
+				if(board[currentPosition.x][currentPosition.y + 1] == 0):
+					#print(click_position)
+					isDragging = true
+					#disable gravity
+					self.sleeping = true
 
 func _input(event):
 	#when the left button is released, drop the cube
@@ -53,6 +58,8 @@ func _input(event):
 				self.sleeping = false
 				#apply gravity to this block
 				applyGravity()
+				#check if the new pos is the goal position
+				checkPosIsValid()
 
 func _physics_process(delta):
 
@@ -73,7 +80,7 @@ func _physics_process(delta):
 			#check that the new position is not out of the bounds
 			if(not(-1 < y and y < maxHeight)):
 				y = currentPosition[1]
-			if(not (-1 < x and x < boardLengthX * 2)):
+			if(not (-1 < x and x < boardLengthX)):
 				x = currentPosition[0]
 			position3D = Vector3(x, y, z)
 				
@@ -83,6 +90,8 @@ func _physics_process(delta):
 				board[position3D.x][position3D.y] == 0):
 
 				moveBlock(position3D)
+
+
 
 
 func moveBlock(newPos : Vector3):
@@ -107,7 +116,7 @@ func moveBlock(newPos : Vector3):
 
 func applyGravity():
 	"""
-	Apply gravity to this block
+	Apply gravity to this block.
 	"""
 	var moved = true
 
@@ -118,8 +127,32 @@ func applyGravity():
 			and currentPosition.y > 0):
 			#move the block down one field
 			moveBlock(currentPosition - Vector3(0, 1, 0))
-			#because this block has been moved try to apply gravity to all other
-			for block in blocks:
-				block[1].applyGravity()
 			moved = true
 
+func setNumber(_nr : int):
+	"""
+	Set the number of this block.
+	And update the text infront to show the number to the player.
+	"""
+
+	self.number = _nr
+	self.get_node("frontNr/Viewport/GUI/Panel/Label").text = str(_nr)
+
+func checkPosIsValid() -> bool:
+	"""
+	Checks if this position is the position where the block should be placed.
+
+	Returns:
+		True if this block is on the goal position, False otherwise.
+	"""
+
+	var valid : bool = false
+	#print(currentPosition)
+	if(goalBoard[self.currentPosition.x][self.currentPosition.y] == self.number):
+		self.get_node("OuterCube").material_override.albedo_color = Color8(255, 255, 255, 255)
+		self.get_node("InnerCube").material_override.albedo_color = Color8(0, 0, 0, 255)
+		set_process(true)
+		valid = true
+		print("valid place for ", str(self.number))
+		#CHECK HERE IF ALL BLOCKS ARE ON THE CORECT SPOT
+	return valid 
