@@ -32,8 +32,6 @@ var correctPosition : bool = false
 
 
 func _ready():
-	lastPosition = currentPosition
-
 	camera = get_viewport().get_camera()
 	
 	GM = get_node("/root/GM")
@@ -42,7 +40,6 @@ func _ready():
 	blocks = GM.get("blocks")
 	boardLengthX = GM.get("boardLength")
 	maxHeight = GM.get("maxHeight")
-
 
 func _input_event(camera, event, click_position, click_normal, shape_idx):
 	#get the position if the cube was clicked
@@ -67,7 +64,6 @@ func _input(event):
 					setMoveCounter()
 					isDragging = false
 					lastPosition = currentPosition
-
 
 func _physics_process(delta):
 
