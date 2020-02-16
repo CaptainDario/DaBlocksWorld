@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://materials/correctPositionMaterial.tres" type="Material" id=1]
+
+[sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 1 )
+size = Vector2( 0.1, 0.1 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0.376782, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.865385, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Curve" id=4]
+max_value = 200.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.294461, 200 ), 0.0, 0.0, 0, 0 ]
+
+[node name="CPUParticles" type="CPUParticles"]
+emitting = false
+amount = 300
+lifetime = 0.5
+one_shot = true
+mesh = SubResource( 1 )
+emission_shape = 2
+emission_box_extents = Vector3( 2, 2, 2 )
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 1, 0 )
+tangential_accel = 5.18
+angle = 445.3
+angle_random = 0.58
+scale_amount = 4.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+anim_speed_curve = SubResource( 4 )
+anim_offset_random = 0.63

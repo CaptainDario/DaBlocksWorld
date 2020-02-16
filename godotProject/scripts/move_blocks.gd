@@ -1,5 +1,8 @@
 extends RigidBody
 
+var whiteBlockMaterial = preload("res://materials/blockWhite.tres")
+var blackBlockMaterial = preload("res://materials/blockBlack.tres")
+
 #is the player currently dragging a cube
 var isDragging = false
 #the root object of this scene
@@ -21,6 +24,8 @@ var maxHeight
 var currentPosition
 #the block number (the number which is written infront of it)
 var number
+#if the block is on the correct place
+var correctPosition : bool = false
 
 
 
@@ -41,11 +46,10 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
 				#only move the cube if there is no block above it 
+				#and it is not already on the orrect position
 				if(board[currentPosition.x][currentPosition.y + 1] == 0):
 					#print(click_position)
 					isDragging = true
-					#disable gravity
-					self.sleeping = true
 
 func _input(event):
 	#when the left button is released, drop the cube
@@ -54,8 +58,6 @@ func _input(event):
 			if !event.pressed:
 				#print("released")
 				isDragging = false
-				#set rigidbody back to active
-				self.sleeping = false
 				#apply gravity to this block
 				applyGravity()
 				#check if the new pos is the goal position
@@ -138,7 +140,7 @@ func setNumber(_nr : int):
 	self.number = _nr
 	self.get_node("frontNr/Viewport/GUI/Panel/Label").text = str(_nr)
 
-func checkPosIsValid() -> bool:
+func checkPosIsValid():
 	"""
 	Checks if this position is the position where the block should be placed.
 
@@ -146,13 +148,42 @@ func checkPosIsValid() -> bool:
 		True if this block is on the goal position, False otherwise.
 	"""
 
-	var valid : bool = false
 	#print(currentPosition)
 	if(goalBoard[self.currentPosition.x][self.currentPosition.y] == self.number):
-		self.get_node("OuterCube").material_override.albedo_color = Color8(255, 255, 255, 255)
-		self.get_node("InnerCube").material_override.albedo_color = Color8(0, 0, 0, 255)
-		set_process(true)
-		valid = true
-		print("valid place for ", str(self.number))
-		#CHECK HERE IF ALL BLOCKS ARE ON THE CORECT SPOT
-	return valid 
+
+		#get the block-number of the block below this one (or zero if none is below)
+		var blockBelow
+		if(self.currentPosition.x != 0):
+			blockBelow = board[self.currentPosition.x][self.currentPosition.y - 1]
+		#this blocks needs to be placed on the lowest x-level or
+		#all blocks below need to be on the correct position
+		if(self.currentPosition.y == 0 or\
+			self.blocks[blockBelow - 1].correctPosition):
+			#set the color for the right position
+			self.get_node("OuterCube").set_material_override(whiteBlockMaterial)
+			self.get_node("InnerCube").set_material_override(blackBlockMaterial)
+			
+			self.correctPosition = true
+			print("valid place for ", str(self.number))
+			#check if all blocks are on the correct position
+			if(checkAllPosIsValid()):
+				print("finished")
+	elif(goalBoard[self.currentPosition.x][self.currentPosition.y] != self.number and self.correctPosition):
+		self.get_node("OuterCube").set_material_override(blackBlockMaterial)
+		self.get_node("InnerCube").set_material_override(whiteBlockMaterial)
+		self.correctPosition = false
+
+
+func checkAllPosIsValid() -> bool:
+	"""
+	Check if every block is on the correct position.
+	"""
+
+	#are all blocks on a valid position
+	var allValid : bool = true
+	for b in self.blocks:
+		if(!b.correctPosition):
+			allValid = false
+			break
+
+	return allValid
