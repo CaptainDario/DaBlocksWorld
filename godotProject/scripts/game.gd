@@ -55,7 +55,7 @@ func difficutly(mode : String):
 
 	if(mode == "easy"):
 		#range(inluive upper and lower bound) 3-5
-		self.boardLength = (randi() % 3 + 3)  
+		self.boardLength = (randi() % 3 + 6)  
 		self.numOfBlocks = self.boardLength * (self.boardLength - 1)
 		self.maxHeight = self.boardLength + 2
 	elif(mode == "casual"):
@@ -71,7 +71,12 @@ func difficutly(mode : String):
 	var gnd = get_node("ground")
 	gnd.scale = Vector3(boardLength / 2.0, gnd.scale.y, gnd.scale.z)
 	gnd.global_translate(Vector3((boardLength / 2.0) - 0.5, 0, 0))
+
 	#move camera
+	var cam = get_viewport().get_camera()
+	cam.look_at_from_position(Vector3(boardLength, maxHeight - 1, 10 + boardLength / 3), \
+								Vector3(boardLength / 2, maxHeight / 2, 0), \
+								Vector3.UP)
 
 func generateCurrentBoard():
 	"""
