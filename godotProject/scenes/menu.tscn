@@ -78,3 +78,6 @@ margin_bottom = 580.0
 theme = ExtResource( 2 )
 text = "?"
 [connection signal="button_down" from="CenterContainer/VBoxContainer/ButtonEasy" to="." method="_on_ButtonEasy_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/ButtonCasual" to="." method="_on_ButtonCasual_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/ButtonHard" to="." method="_on_ButtonHard_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/ButtonVeryHard" to="." method="_on_ButtonVeryHard_button_down"]

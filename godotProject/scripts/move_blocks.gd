@@ -20,8 +20,10 @@ var blocks
 var boardLengthX
 #maximum height of the board
 var maxHeight
+#the last position of this block
+var lastPosition : Vector3
 #the current position of this block
-var currentPosition
+var currentPosition : Vector3
 #the block number (the number which is written infront of it)
 var number
 #if the block is on the correct place
@@ -30,6 +32,8 @@ var correctPosition : bool = false
 
 
 func _ready():
+	lastPosition = currentPosition
+
 	camera = get_viewport().get_camera()
 	
 	GM = get_node("/root/GM")
@@ -57,11 +61,13 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT:
 			if !event.pressed:
 				#print("released")
-				isDragging = false
-				#apply gravity to this block
-				applyGravity()
-				#check if the new pos is the goal position
-				checkPosIsValid()
+				if(isDragging):
+					applyGravity()
+					checkPosIsValid()
+					setMoveCounter()
+					isDragging = false
+					lastPosition = currentPosition
+
 
 func _physics_process(delta):
 
@@ -95,7 +101,6 @@ func _physics_process(delta):
 
 
 
-
 func moveBlock(newPos : Vector3):
 	"""
 	Moves this block to the coordinates specified
@@ -113,7 +118,7 @@ func moveBlock(newPos : Vector3):
 	var t = get_transform()
 	t.origin = newPos
 	set_transform(t)
-	
+
 	currentPosition = newPos
 
 func applyGravity():
@@ -140,6 +145,15 @@ func setNumber(_nr : int):
 	self.number = _nr
 	self.get_node("frontNr/Viewport/GUI/Panel/Label").text = str(_nr)
 
+func setMoveCounter():
+	"""
+	Set the move counter at the top of the display
+	"""
+
+	if(currentPosition != lastPosition):
+		get_node("/root/GM").moves += 1
+		get_node("/root/GM/Control/LabelMoves").text = str(get_node("/root/GM").moves)
+
 func checkPosIsValid():
 	"""
 	Checks if this position is the position where the block should be placed.
@@ -163,7 +177,6 @@ func checkPosIsValid():
 		self.get_node("OuterCube").set_material_override(blackBlockMaterial)
 		self.get_node("InnerCube").set_material_override(whiteBlockMaterial)
 		self.correctPosition = false
-
 
 func checkAllPosIsValid() -> bool:
 	"""

@@ -26,7 +26,7 @@ var cWhite : Color = Color8(255, 255, 255, 255)
 func _ready():
 
 	randomize()
-	difficutly("easy")
+	difficutly()
 
 	initializeBoards()
 	generateCurrentBoard()
@@ -46,24 +46,33 @@ func initializeBoards():
 	#subtract 1 of the maximum height so an array out of range is prevented
 	maxHeight -= 1
 
-func difficutly(mode : String):
+func difficutly():
 	"""
 	Set all variables according to the selected difficulty.
 	(Board length, max height, number of blocks)
 	"""
 
 
-	if(mode == "easy"):
+	if(globals.difficulty == "easy"):
 		#range(inluive upper and lower bound) 3-5
-		self.boardLength = (randi() % 3 + 6)  
+		self.boardLength = 4  
+		self.numOfBlocks = self.boardLength * (self.boardLength - 1)
+		self.maxHeight = self.boardLength + 4
+	elif(globals.difficulty == "casual"):
+		#range(inluive upper and lower bound) 3-5
+		self.boardLength = 5  
+		self.numOfBlocks = self.boardLength * (self.boardLength - 1)
+		self.maxHeight = self.boardLength + 4
+	elif(globals.difficulty == "hard"):
+		#range(inluive upper and lower bound) 3-5
+		self.boardLength = (randi() % 2 + 6)  
+		self.numOfBlocks = self.boardLength * (self.boardLength - 1)
+		self.maxHeight = self.boardLength + 3
+	elif(globals.difficulty == "very hard"):
+		#range(inluive upper and lower bound) 3-5
+		self.boardLength = (randi() % 2 + 8)  
 		self.numOfBlocks = self.boardLength * (self.boardLength - 1)
 		self.maxHeight = self.boardLength + 2
-	elif(mode == "casual"):
-		pass
-	elif(mode == "hard"):
-		pass
-	elif(mode == "very hard"):
-		pass
 
 	print(boardLength) 
 	
@@ -107,6 +116,7 @@ func generateCurrentBoard():
 		blockInst.setNumber(b + 1)
 		#apply gravity to this block
 		blockInst.applyGravity()
+		blockInst.set("lastPosition", blockInst.currentPosition)
 		#add the block to the list with all blocks
 		blocks.append(blockInst)
 
