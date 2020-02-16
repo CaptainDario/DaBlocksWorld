@@ -150,24 +150,15 @@ func checkPosIsValid():
 
 	#print(currentPosition)
 	if(goalBoard[self.currentPosition.x][self.currentPosition.y] == self.number):
-
-		#get the block-number of the block below this one (or zero if none is below)
-		var blockBelow
-		if(self.currentPosition.x != 0):
-			blockBelow = board[self.currentPosition.x][self.currentPosition.y - 1]
-		#this blocks needs to be placed on the lowest x-level or
-		#all blocks below need to be on the correct position
-		if(self.currentPosition.y == 0 or\
-			self.blocks[blockBelow - 1].correctPosition):
-			#set the color for the right position
-			self.get_node("OuterCube").set_material_override(whiteBlockMaterial)
-			self.get_node("InnerCube").set_material_override(blackBlockMaterial)
-			
-			self.correctPosition = true
-			print("valid place for ", str(self.number))
-			#check if all blocks are on the correct position
-			if(checkAllPosIsValid()):
-				print("finished")
+		#set the color for the right position
+		self.get_node("OuterCube").set_material_override(whiteBlockMaterial)
+		self.get_node("InnerCube").set_material_override(blackBlockMaterial)
+		
+		self.correctPosition = true
+		print("valid place for ", str(self.number))
+		#check if all blocks are on the correct position
+		if(checkAllPosIsValid()):
+			print("finished")
 	elif(goalBoard[self.currentPosition.x][self.currentPosition.y] != self.number and self.correctPosition):
 		self.get_node("OuterCube").set_material_override(blackBlockMaterial)
 		self.get_node("InnerCube").set_material_override(whiteBlockMaterial)
