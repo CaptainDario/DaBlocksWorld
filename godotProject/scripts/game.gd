@@ -4,29 +4,29 @@ extends Spatial
 
 onready var block = preload("res://scenes/block.tscn")
 
-#the block
+#number of blocks which should be generated
+var numOfBlocks : int
+#the blocks
 var blocks = []
-
 #the board length
 var boardLength : int
 #the maximum height
-var maxHeight : int = 10
+var maxHeight : int
 #the board as matrix
 var board = []
 #the state which is defined as goal (the state in which the current board has to be transformed)
 var goalBoard = []
 #the number of moves the player has done until now
 var moves : int = 0
-
+#the colors for the cubes
 var cBlack : Color = Color8(0, 0, 0, 255)
 var cWhite : Color = Color8(255, 255, 255, 255)
 
 
 func _ready():
 
-
-	#get the length of the ground (board length)
-	boardLength = get_node("ground").scale.x * 2
+	randomize()
+	difficutly("easy")
 
 	#initialize the currentBoard and goalBoard 
 	for x in range(boardLength):
@@ -43,14 +43,38 @@ func _ready():
 	generateBoards()
 
 
+func difficutly(mode : String):
+	"""
+	Set all variables according to the selected difficulty.
+	(Board length, max height, number of blocks)
+	"""
+
+	#set a free margin on the sides of the board
+	var margin : int = 0
+
+	if(mode == "easy"):
+		margin = 2
+		#range(inluive upper and lower bound) 3-5
+		self.boardLength = (randi() % 3 + 3) + margin  
+		self.maxHeight = 10
+		self.numOfBlocks = randi() % self.boardLength + self.boardLength# * 3
+		print(boardLength) 
+	
+	#get the length of the ground (board length)
+	var gnd = get_node("ground")
+	gnd.scale = Vector3(boardLength / 2.0, gnd.scale.y, gnd.scale.z)
+	gnd.global_translate(Vector3((boardLength / 2.0) - 0.5, 0, 0))
+	#move camera
+
+
+
 func generateBoards():
 	"""
 	This generates a current board state and a goal board state.
 	According to the current board state all blocks will be instantiated.
 	"""
-	var numOfBlocks = 10
 	
-	for b in range(numOfBlocks):
+	for b in range(self.numOfBlocks):
 		#CURRENT BOARD
 		#create random block coordinate for the currentBoard
 		var rndBlockCur = generateRandomBlock()
@@ -75,7 +99,7 @@ func generateBoards():
 		#apply gravity to this block
 		blockInst.applyGravity()
 		#add the block to the list with all blocks
-		blocks.append([b, blockInst])
+		blocks.append(blockInst)
 
 		#GOAL BOARD
 		#get a random coor which has a different x-coor from the currentBoard-coor
@@ -96,26 +120,24 @@ func generateBoards():
 				rndBlockGoal -= Vector3(0, 1, 0)
 				moved = true
 
-		
-
 func generateRandomBlock() -> Vector3:
 	"""
 	Generate a random location for a block.
 	This functions assures that on the generate location is no other block.
+	The first and last column will not be used either for palcing cubes.
 
 	Returns:
 		A Vector3 which contains the position.
 		note: z will always be 0
 	"""
 
-	randomize()
 
 	var randX : int
 	var randY : int
 	var valid : bool = false
 
 	while !valid:
-		randX = randi() % (boardLength - 1)
+		randX = randi() % (boardLength - 2) + 1
 		randY = randi() % (maxHeight - 1)
 
 		#make sure there is no block on this cell
