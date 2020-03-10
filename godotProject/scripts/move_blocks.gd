@@ -152,10 +152,8 @@ func setMoveCounter():
 
 func checkPosIsValid():
 	"""
-	Checks if this position is the position where the block should be placed.
-
-	Returns:
-		True if this block is on the goal position, False otherwise.
+	Checks if curren position is the position where the block should be placed.
+	Changes the color of this block accordingly.
 	"""
 
 	#print(currentPosition)

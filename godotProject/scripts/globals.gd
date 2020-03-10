@@ -1,3 +1,3 @@
 extends Node
 
-var difficulty = ""
+var difficulty = "easy"
