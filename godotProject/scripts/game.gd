@@ -32,7 +32,9 @@ func _ready():
 	generateGoalBoard()
 	generateCurrentBoard()
 
-	var strBoard = boardToString()
+	var strBoard = boardToString(board)
+
+	#solve the board with clingo
 
 func initializeBoards():
 	"""
@@ -159,7 +161,7 @@ func generateRandomBlock() -> Vector3:
 
 	return Vector3(randX, randY, 0)
 
-func boardToString() -> String:
+func boardToString(_board) -> String:
 	"""
 	Returns a string representation of the current board.
 	This string matches the syntax of clingo.
@@ -175,27 +177,31 @@ func boardToString() -> String:
 	boardStr += "table(0)." + "\n"
 
 	#add the initial state of all blocks
-	for x in board.size():
-		for y in board[x].size():
+	for x in _board.size():
+		for y in _board[x].size():
 			if(board[x][y] != 0):
 				if(y > 0):
-					boardStr += "init(" + str(board[x][y]) + "," + str(board[x][y-1]) + ")."
+					boardStr += "init(" + str(_board[x][y]) + "," + str(_board[x][y-1]) + ")."
 				if(y == 0):
-					boardStr += "init(" + str(board[x][y]) + ", 0)."
+					boardStr += "init(" + str(_board[x][y]) + ", 0)."
 		boardStr += "\n"
 
 
 	#add the goal state of all blocks
-	var cnt = 0
-	for x in board.size():
-		for y in board[x].size():
+	var cnt = 1
+
+	for x in range(_board[0].size()):
+		for y in range(_board.size()):
 			if(cnt < numOfBlocks):
-				boardStr += "goal(" + str(x) + "," + str(y) + ")."
+				
+				if(x == 0):
+					boardStr += "goal(" + str(cnt) + "," + str(x) + ")."
+				else:
+					boardStr += "goal(" + str(cnt) + "," + str(cnt - _board.size()) + ")."
 				cnt += 1
-			else:
-				break
-			
-		boardStr += "\n"
+
+				if(cnt % boardLength == 1):
+					boardStr += "\n"
 
 	print(boardStr)
 
