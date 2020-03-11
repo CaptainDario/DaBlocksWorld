@@ -1,12 +1,58 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/menu.gd" type="Script" id=1]
 [ext_resource path="res://defaultTheme.tres" type="Theme" id=2]
+[ext_resource path="res://fonts/robotBlack.tres" type="DynamicFont" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+
+[sub_resource type="QuadMesh" id=1]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.709751, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.709751, 0.709751, 0.709751, 1, 1, 1, 1, 1 )
+
+[sub_resource type="ProceduralSky" id=2]
+sky_top_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+sky_horizon_color = Color( 0, 0, 0, 1 )
+sky_curve = 0.36
+ground_bottom_color = Color( 0, 0, 0, 1 )
+ground_horizon_color = Color( 0, 0, 0, 1 )
+sun_color = Color( 1, 0.847059, 0.517647, 1 )
+sun_latitude = 28.74
+sun_longitude = 45.39
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+fog_depth_begin = 728.7
+fog_depth_end = 3931.8
+fog_depth_curve = 8.57419
+fog_transmit_curve = 61.82
+fog_height_curve = 147.033
+glow_enabled = true
+glow_intensity = 0.6
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 261.192
+margin_top = 245.0
+margin_right = 1090.61
+margin_bottom = 335.0
+rect_rotation = -13.1
+rect_scale = Vector2( 1.25, 1.25 )
+theme = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "DaBlocksWorldPlanning"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -19,15 +65,15 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 783.0
-margin_top = 250.0
-margin_right = 1137.0
-margin_bottom = 830.0
+margin_left = 778.0
+margin_top = 245.0
+margin_right = 1141.0
+margin_bottom = 835.0
 theme = ExtResource( 2 )
 
 [node name="ButtonEasy" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 354.0
-margin_bottom = 108.0
+margin_right = 363.0
+margin_bottom = 110.0
 theme = ExtResource( 2 )
 action_mode = 0
 text = "Easy"
@@ -36,9 +82,9 @@ __meta__ = {
 }
 
 [node name="ButtonCasual" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 112.0
-margin_right = 354.0
-margin_bottom = 220.0
+margin_top = 114.0
+margin_right = 363.0
+margin_bottom = 224.0
 theme = ExtResource( 2 )
 text = "Casual"
 __meta__ = {
@@ -46,9 +92,9 @@ __meta__ = {
 }
 
 [node name="ButtonHard" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 224.0
-margin_right = 354.0
-margin_bottom = 332.0
+margin_top = 228.0
+margin_right = 363.0
+margin_bottom = 338.0
 theme = ExtResource( 2 )
 text = "Hard"
 __meta__ = {
@@ -56,9 +102,9 @@ __meta__ = {
 }
 
 [node name="ButtonVeryHard" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 336.0
-margin_right = 354.0
-margin_bottom = 444.0
+margin_top = 342.0
+margin_right = 363.0
+margin_bottom = 452.0
 theme = ExtResource( 2 )
 text = "Very Hard"
 __meta__ = {
@@ -66,17 +112,34 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer"]
-margin_top = 448.0
-margin_right = 354.0
-margin_bottom = 468.0
+margin_top = 456.0
+margin_right = 363.0
+margin_bottom = 476.0
 theme = ExtResource( 2 )
 
 [node name="ButtonHowToPlay" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 472.0
-margin_right = 354.0
-margin_bottom = 580.0
+margin_top = 480.0
+margin_right = 363.0
+margin_bottom = 590.0
 theme = ExtResource( 2 )
 text = "?"
+
+[node name="CPUParticles" type="CPUParticles" parent="."]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
+material_override = SubResource( 4 )
+amount = 500
+lifetime = 50.0
+mesh = SubResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity_random = 0.01
+scale_amount = 0.01
+scale_amount_random = 0.01
+color_ramp = SubResource( 5 )
+
+[node name="Camera" type="Camera" parent="."]
+environment = SubResource( 3 )
 [connection signal="button_down" from="CenterContainer/VBoxContainer/ButtonEasy" to="." method="_on_ButtonEasy_button_down"]
 [connection signal="button_down" from="CenterContainer/VBoxContainer/ButtonCasual" to="." method="_on_ButtonCasual_button_down"]
 [connection signal="button_down" from="CenterContainer/VBoxContainer/ButtonHard" to="." method="_on_ButtonHard_button_down"]

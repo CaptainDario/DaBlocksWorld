@@ -32,7 +32,7 @@ func _ready():
 	generateGoalBoard()
 	generateCurrentBoard()
 
-	var strBoard = boardToString(board)
+	var strBoard = boardToAtoms(board)
 
 	#solve the board with clingo
 
@@ -161,7 +161,7 @@ func generateRandomBlock() -> Vector3:
 
 	return Vector3(randX, randY, 0)
 
-func boardToString(_board) -> String:
+func boardToAtoms(_board) -> String:
 	"""
 	Returns a string representation of the current board.
 	This string matches the syntax of clingo.
