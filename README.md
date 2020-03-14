@@ -9,3 +9,6 @@ For more details about the ASP encoding you can refer to the original paper: htt
 
 
 If you just want to play the game builds for Linux, Windows and Mac are available but only the Linux version is tested.
+
+At the moment the ready made executable for Windows/Mac/Linux of clingo is used therefore an android/iOS port is unavailable.
+However with GDNative it could be possible to cross compile the c++ source of clingo and use it on android.
