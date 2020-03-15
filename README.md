@@ -11,7 +11,7 @@ For more details about the ASP encoding you can refer to the original paper: htt
 If you just want to play the game builds for Linux, Windows and Mac are available but only the Linux version is tested.
 
 At the moment the ready made executable for Windows/Mac/Linux of clingo is used therefore an android/iOS port is unavailable.
-However with GDNative it could be possible to cross compile the c++ source of clingo and use it on android.
+However with GDNative it could be possible to cross compile the c++ source of clingo and use it on android/iOS.
 
 
 ## How to play
@@ -19,6 +19,8 @@ However with GDNative it could be possible to cross compile the c++ source of cl
 In the classic blocks world planning problem a (random) start configuration should be transformed to a (random) goal configuration.
 In DaBlocksWorld however the goal configuration is not random. 
 The blocks allways need to be stacked with increasing numbers.
+The number in the top right corner indicates the height of each stack.
+As seen here:
 
 ## Screenshots
 
