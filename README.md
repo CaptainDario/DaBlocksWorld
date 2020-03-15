@@ -25,6 +25,6 @@ The blocks allways need to be stacked with increasing numbers.
 
 ### Credits
 
-code/general design: DaAppLab
-earth model: CraigForster (https://www.blendswap.com/blend/18286)
-music: Aviators - Infinity Awaits Us (https://www.youtube.com/watch?v=sisGSwT2eN0&t=259s)
+code/general design: DaAppLab </br>
+earth model: CraigForster (https://www.blendswap.com/blend/18286) </br>
+music: Aviators - Infinity Awaits Us (https://www.youtube.com/watch?v=sisGSwT2eN0&t=259s)</br>
