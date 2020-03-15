@@ -12,3 +12,12 @@ If you just want to play the game builds for Linux, Windows and Mac are availabl
 
 At the moment the ready made executable for Windows/Mac/Linux of clingo is used therefore an android/iOS port is unavailable.
 However with GDNative it could be possible to cross compile the c++ source of clingo and use it on android.
+
+
+## How to play
+
+In the classic blocks world planning problem a (random) start configuration should be transformed to a (random) goal configuration.
+In DaBlocksWorld however the goal configuration is not random. 
+The blocks allways need to be stacked with increasing numbers.
+
+## Screenshots
