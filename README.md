@@ -1,14 +1,14 @@
 # DaBlocksWorld
 
 DaBlocksWorldPlanning is an implementation of the "Blocks World" planning Problem (https://en.wikipedia.org/wiki/Blocks_world) in the Godot Game Engine.
-In this implementation Clingo is used to solve the randomly generated puzzle.
+In this interactive implementation a configuration gets randomly created and then solved by Clingo (https://potassco.org/clingo/).
 
 
 If you want to learn more about this implementation you can read the paper in the paper folder.
-For more details about the ASP encoding you can refer to the original paper: https://aaai.org/ojs/index.php/aimagazine/article/view/2673 .
+If you are still interested after reading the paper above you can refer to the original paper: https://aaai.org/ojs/index.php/aimagazine/article/view/2673 .
 
 
-If you just want to play the game builds for Linux, Windows and Mac are available but only the Linux version is tested.
+If you just want to play the game, builds for Linux, Windows and Mac are available but only the Linux/Windows version are tested.
 
 At the moment the ready made executable for Windows/Mac/Linux of clingo is used therefore an android/iOS port is unavailable.
 However with GDNative it could be possible to cross compile the c++ source of clingo and use it on android/iOS.
