@@ -23,7 +23,7 @@ The number in the top right corner indicates the height of each stack.
 As seen here:
 
 ## Screenshots
-
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 
 ### Credits
 
