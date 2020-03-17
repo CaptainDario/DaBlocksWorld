@@ -18,12 +18,15 @@ However with GDNative it could be possible to cross compile the c++ source of cl
 
 In the classic blocks world planning problem a (random) start configuration should be transformed to a (random) goal configuration.
 In DaBlocksWorld however the goal configuration is not random. 
-The blocks allways need to be stacked with increasing numbers.
-The number in the top right corner indicates the height of each stack.
-As seen here:
+The blocks allways need to be stacked with increasing numbers sorted by color.
+![Start to finish](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
+However the placement of the stacks does not matter.
+![Amibigous goal configs](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
 
 ## Screenshots
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Main Menu](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
+![In Game start](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
+![In Game finished](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
 
 ### Credits
 
