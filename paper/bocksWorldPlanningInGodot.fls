@@ -87,9 +87,9 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/./images/start_goal_config.png
 INPUT ./images/start_goal_config.png
 INPUT ./images/start_goal_config.png
-INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/./images/colorizedBlocks.png
-INPUT ./images/colorizedBlocks.png
-INPUT ./images/colorizedBlocks.png
+INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/./images/start_goal_config_colored.png
+INPUT ./images/start_goal_config_colored.png
+INPUT ./images/start_goal_config_colored.png
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm

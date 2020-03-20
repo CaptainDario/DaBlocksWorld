@@ -40,9 +40,9 @@
         This random configuration will be parsed into facts which will be the input for Clingo (a combination of an ASP solver and grounder).
         Afterwards we will use the output of Clingo to rate the player's performance of solving the puzzle.\newline
         The first section of this paper will try to explain the Blocks World planning problem (BWPP) in a detailed way.
-        The following section will explain the differences we made to the BWPP to make it an interactive game.
-        The third will be targeted towards the Godot game engine we used to implement this project.
-        Finally we want to talk about the encoding which solves the BWPP configurations.
+        The following section will explain the modifications we made to the BWPP and why we made them.
+        The third section will be targeted towards the Godot game engine we used to implement this project.
+        Finally we want to talk about the algorithm which generates and solves BWPP configurations.
 
     \section{The Blocks World planning problem}
         The BWPP is a planning problem in which blocks need to be restacked onto each other.
@@ -98,40 +98,42 @@
         But there is also a version of the game engine which enables the possibility to develop using C\#.
         This means one can develop in the Godot game engine using C/C++/C\#/GDScript.
         Because the benefit of a higher performance with C/C++/C\# \cite{godotPerformanceComparison} is negligible in this project,
-        we used GDScript for this project.\newline
-        In the current implementation of DaBlocksWorld we used the ready made versions of Clingo for OSX, Windows and Linux \cite{clingoGithub}.
+        GDScript was used.\newline
+        In the current implementation of DaBlocksWorld the ready made versions of Clingo for OSX, Windows and Linux \cite{clingoGithub} were used.
         This however limits our target platform to these three.
         Godot provides an interface called GDNative.
-        This makes it possible to use custom C++ code in your game.
+        This enables the possibility to use custom C++ code in your game.
         Therefore it should be possible to use the source code of Clingo \cite{clingoGithub} and reach more platforms like android, iOS  
         
     \section{Game design decisions}
-        Because this projects aims to provide a somewhat enjoyable gaming experience we modified the standard BWPP.
-        We tried to modify the problem in such a way that the game is as easy to understand as possible.
+        Because this projects aims to provide a somewhat enjoyable gaming experience the standard BWPP got modified.
+        The modifications aim to make the game understandable without any explanations.
         Ideally somebody who does not know the BWPP understands the game without further explanation.
-        For better differentiation we call this project `DaBlockWorld'\newline
-        The first modification we made was that we limited the maximum number of blocks which can be stacked onto each other.
+        For better differentiation this project got the name `DaBlockWorld'.\newline
+        The first modification was that the maximum number of blocks which can be stacked onto each other got limited.
         This was necessary as the screen on which the game would be played is obviously limited in size.
-        For the same reason we limited the maximum numbers of stacks which can be placed on the table.\newline
-        The next modification we made is due to the fact that the order of the block-stacks does not matter as shown in \ref{ambiguousGoalConfig}.
-        We did not use subsequent numbers like $1 ... numberOfBlocks$ but rather numbers like $1 ... numberOfBlocks / numberOfStacks$.
-        With this modification we tried to show that the placement of the stacks is unimportant.
+        For the same reason the maximum numbers of stacks which can be placed on the table got limited too.\newline
+        The next modification is due to the fact that the order of the block-stacks does not matter as shown in \ref{ambiguousGoalConfig}.
+        Therefore on the blocks were not subsequent numbers like $1 ... numberOfBlocks$ shown.
+        But rather numbers like $1 ... numberOfBlocks / numberOfStacks$.
+        This modification was made with the intention to show that the placement of the stacks is unimportant.
         This however leads to the problem that one does not know which of the multiple numbers needs to be placed on which stack.
         As an example: if there are 3 stacks from 1 to 3 it is not clear which 2 needs to be placed on which 1.
-        We tried to overcome this by coloring the blocks.
-        This modification can been seen in figure \ref{colorizedBlocks}. \newline
+        To overcome this problem the blocks which belong to the same stack got the same color.
+        The modifications can been seen in figure \ref{colorizedGoal}.
+        On the left side the new start configuration can be seen and ob the right side the new goal configuration.\newline
         
         \begin{figure}[h]
             \centering
-            \includegraphics[width=10cm]{colorizedBlocks.png}
-            \caption{Changed BWPP}
-            \label{colorizedBlocks}
+            \includegraphics[width=10cm]{start_goal_config_colored.png}
+            \caption{Changed BWPP and goal}
+            \label{colorizedGoal}
         \end{figure} 
 
     \section{Generating and solving configurations}
-        We wrote a simple Generator for BWPPs in the custom scripting language GodotScript.
+        In the custom scripting language GodotScript a generator for BWPP configurations got developed.
         The main logical part of this generator can be found in listing \ref{generatingConfiguration}.
-        We will exclude the part of the graphical instantiation from this paper all together. \newline
+        How the graphics work will be excluded entirely from this paper because it would go beyond the scope of this paper. \newline
         `self.numOfBlocks' tells the game how many blocks should be placed in the current puzzle. 
         Now the generator creates a block according to this number (line 2).
         `generateRandomBlock()' returns a random Vector3 which is always inside of the bounds given by the selected difficulty.
@@ -164,9 +166,10 @@
 
                 return Vector3(randX, randY, 0)
         \end{lstlisting}
-            
-        Listing \ref{modification} shows the addition we made to the encoding of \cite{originalEncodingPaper}.
-        The encoding found in \cite{originalEncodingPaper} solves every possible BWPP therefore we adapted it to suit our needs.\newline
+           
+        In \cite{originalEncodingPaper} a solver for arbitrary BWPP configurations got developed.
+        For this project the encoding from this paper was used as a baseline and got extended to suit our modified problem.
+        In listing \ref{modification} one can see the modifications to the base encoding.\newline
         $blocksOnGround/2$ simply keeps track of the amount of blocks $A$ which are on the ground at a specific point in time $t$.
         $height/2$ counts for every block the height by recursively adding the blocks up.
 

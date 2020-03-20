@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1584573740 "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.tex" "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.pdf" "bocksWorldPlanningInGodot" 1584573741
-  "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.aux" 1584573741 2261 3aa289cda13c9f7803a79ceb272c1799 ""
-  "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.tex" 1584573738 12502 77a235acd33958a497e386f3abd354a7 ""
+["pdflatex"] 1584709083 "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.tex" "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.pdf" "bocksWorldPlanningInGodot" 1584709084
+  "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.aux" 1584709084 2235 8aa9bbd066cf973ed145936ebbe8319b ""
+  "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.tex" 1584709081 12759 2f19d2990eb620e3e6779ba7f5353b6d ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1572595918 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1572595918 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1572595918 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -59,16 +59,16 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1572595918 33301 a3134070eacafb10b1f371612ce2650d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1581504057 4572998 f9631eebba48c3ee98e5d310044b0a09 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1581504047 8044939 5911118ab1dd667900049c368a0a25a4 ""
-  "bocksWorldPlanningInGodot.aux" 1584573741 2261 3aa289cda13c9f7803a79ceb272c1799 "pdflatex"
-  "bocksWorldPlanningInGodot.tex" 1584573738 12502 77a235acd33958a497e386f3abd354a7 ""
+  "bocksWorldPlanningInGodot.aux" 1584709084 2235 8aa9bbd066cf973ed145936ebbe8319b "pdflatex"
+  "bocksWorldPlanningInGodot.tex" 1584709081 12759 2f19d2990eb620e3e6779ba7f5353b6d ""
   "images/ambiguous_goal_config.png" 1584393727 24134 0a951adc86ac36176bcf9f9ddef27e21 ""
-  "images/colorizedBlocks.png" 1584546797 133792 687eb5336142c54288552f55a15e767a ""
   "images/start_config.png" 1584393727 14595 5060dd8df925ff448160589843175426 ""
   "images/start_goal_config.png" 1584393727 27138 258c30f2d760ac89c9735f42c4811e9c ""
+  "images/start_goal_config_colored.png" 1584704598 218388 0ec4a4a5187301fc5311925282fae273 ""
   "llncs.cls" 1584393727 42249 b08ec23e994470d7d8fc268d245cf555 ""
   (generated)
   "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.pdf"
-  "bocksWorldPlanningInGodot.pdf"
-  "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.log"
-  "bocksWorldPlanningInGodot.aux"
   "bocksWorldPlanningInGodot.log"
+  "/home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/paper/bocksWorldPlanningInGodot.log"
+  "bocksWorldPlanningInGodot.pdf"
+  "bocksWorldPlanningInGodot.aux"
