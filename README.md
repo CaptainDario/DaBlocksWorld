@@ -19,7 +19,7 @@ However with GDNative it could be possible to cross compile the c++ source of cl
 In the classic blocks world planning problem a (random) start configuration should be transformed to a (random) goal configuration.
 In DaBlocksWorld however the goal configuration is not random. 
 The blocks allways need to be stacked with increasing numbers sorted by color. </br>
-![Start to finish](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
+![Start to finish](https://github.com/CaptainDario/DaBlocksWorld/blob/master/slides/images/start_goal_config_colored.png)
 </br> However the placement of the stacks does not matter. 
 The following picutre shows the "same" configuration</br>
 ![Amibigous goal configs](https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/ambiguous_goal_config.png)
