@@ -20,13 +20,14 @@ In the classic blocks world planning problem a (random) start configuration shou
 In DaBlocksWorld however the goal configuration is not random. 
 The blocks allways need to be stacked with increasing numbers sorted by color. </br>
 ![Start to finish](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
-</br> However the placement of the stacks does not matter. </br>
-![Amibigous goal configs](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
+</br> However the placement of the stacks does not matter. 
+The following picutre shows the "same" configuration</br>
+![Amibigous goal configs](https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/ambiguous_goal_config.png)
 
 ## Screenshots
-![Main Menu](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
-![In Game start](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
-![In Game finished](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
+![Main Menu](https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/titleScreen.png)
+![In Game start](https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/colorizedBlocks.png)
+![In Game finished](https://github.com/CaptainDario/DaBlocksWorld/tree/master/slides/images/coloredGoalConfig.png)
 
 ### Credits
 
