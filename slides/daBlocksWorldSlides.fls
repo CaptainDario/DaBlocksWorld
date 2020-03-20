@@ -477,6 +477,12 @@ INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBloc
 OUTPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
 INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
 INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
+INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/./images/start_goal_config_colored.png
+INPUT ./images/start_goal_config_colored.png
+INPUT ./images/start_goal_config_colored.png
+OUTPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
+INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
+INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
 OUTPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
 INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
 INPUT /home/dario/data/uni/5semester/agentTechnology/daBlocksWorld/slides/daBlocksWorldSlides.vrb
