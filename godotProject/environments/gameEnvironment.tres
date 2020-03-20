@@ -1,0 +1,17 @@
+[gd_resource type="Environment" load_steps=2 format=2]
+
+[ext_resource path="res://environments/gameProceduralsky.tres" type="ProceduralSky" id=1]
+
+[resource]
+background_mode = 2
+background_sky = ExtResource( 1 )
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/3 = false
+glow_levels/4 = true
+glow_levels/5 = false
+glow_intensity = 1.81
+glow_strength = 1.24
+glow_bloom = 0.29
+adjustment_saturation = 3.13

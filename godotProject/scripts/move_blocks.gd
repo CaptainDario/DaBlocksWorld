@@ -13,7 +13,8 @@ var z = 0
 var camera
 #the board matrix from the tree root
 var board
-var goalBoard
+var goalBoardHeight
+var goalBoardBlockBelow
 #all other blocks
 var blocks
 #the length of the board
@@ -32,14 +33,15 @@ var correctPosition : bool = false
 
 
 func _ready():
-	camera = get_viewport().get_camera()
+	self.camera = get_viewport().get_camera()
 	
-	GM = get_node("/root/GM")
-	board = GM.get("board")
-	goalBoard = GM.get("goalBoard")
-	blocks = GM.get("blocks")
-	boardLengthX = GM.get("boardLength")
-	maxHeight = GM.get("maxHeight")
+	self.GM = get_node("/root/GM")
+	self.board = GM.get("board")
+	self.goalBoardHeight = GM.get("goalBoardHeight")
+	self.goalBoardBlockBelow = GM.get("goalBoardBlockBelow")
+	self.blocks = GM.get("blocks")
+	self.boardLengthX = GM.get("boardLength")
+	self.maxHeight = GM.get("maxHeight")
 
 func _input_event(camera, event, click_position, click_normal, shape_idx):
 	#get the position if the cube was clicked
@@ -96,7 +98,6 @@ func _physics_process(delta):
 				moveBlock(position3D)
 
 
-
 func moveBlock(newPos : Vector3):
 	"""
 	Moves this block to the coordinates specified
@@ -132,14 +133,14 @@ func applyGravity():
 			moveBlock(currentPosition - Vector3(0, 1, 0))
 			moved = true
 
-func setNumber(_nr : int):
+func setNumber(_nr : int, _display_nr : int):
 	"""
 	Set the number of this block.
 	And update the text infront to show the number to the player.
 	"""
 
 	self.number = _nr
-	self.get_node("frontNr/Viewport/GUI/Panel/Label").text = str(_nr)
+	self.get_node("frontNr/Viewport/GUI/Panel/Label").text = str(_display_nr)
 
 func setMoveCounter():
 	"""
@@ -148,7 +149,7 @@ func setMoveCounter():
 
 	if(currentPosition != lastPosition):
 		get_node("/root/GM").moves += 1
-		get_node("/root/GM/Control/LabelMoves").text = str(get_node("/root/GM").moves)
+		get_node("/root/GM/Control/labels/moves/CenterContainer/HBoxContainer/player").text = str(get_node("/root/GM").moves)
 
 func checkPosIsValid():
 	"""
@@ -156,20 +157,27 @@ func checkPosIsValid():
 	Changes the color of this block accordingly.
 	"""
 
-	#print(currentPosition)
-	if(goalBoard[self.currentPosition.x][self.currentPosition.y] == self.number):
+	var blockBelowIsCorrect : bool = false
+	if(self.currentPosition.y == 0):
+		if(self.goalBoardBlockBelow[self.number] == 0):
+			blockBelowIsCorrect = true
+	else:
+		if(self.board[self.currentPosition.x][self.currentPosition.y - 1] == self.goalBoardBlockBelow[self.number]):
+			blockBelowIsCorrect = true
+
+	if(self.currentPosition.y == self.goalBoardHeight[self.number] and blockBelowIsCorrect):
 		#set the color for the right position
 		self.get_node("OuterCube").set_material_override(whiteBlockMaterial)
-		self.get_node("InnerCube").set_material_override(blackBlockMaterial)
-		
 		self.correctPosition = true
 		print("valid place for ", str(self.number))
 		#check if all blocks are on the correct position
 		if(checkAllPosIsValid()):
 			print("finished")
-	elif(goalBoard[self.currentPosition.x][self.currentPosition.y] != self.number and self.correctPosition):
+			self.get_node("/root/GM/Control/popupFinish").popup_centered()
+
+	elif((self.currentPosition.y != self.goalBoardHeight[self.number] and self.correctPosition) or 
+			blockBelowIsCorrect == false):
 		self.get_node("OuterCube").set_material_override(blackBlockMaterial)
-		self.get_node("InnerCube").set_material_override(whiteBlockMaterial)
 		self.correctPosition = false
 
 func checkAllPosIsValid() -> bool:

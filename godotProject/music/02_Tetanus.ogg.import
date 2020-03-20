@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/02_Tetanus.ogg-afb019d65952ab3729707ea1216b3b49.oggstr"
+
+[deps]
+
+source_file="res://music/02_Tetanus.ogg"
+dest_files=[ "res://.import/02_Tetanus.ogg-afb019d65952ab3729707ea1216b3b49.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,5 +1,7 @@
 extends Control
 
+onready var aboutPopUp : PopupDialog = get_node("/root/Control/popup")
+
 func _ready():
 	pass
 
@@ -23,5 +25,5 @@ func _on_ButtonVeryHard_button_down():
 	globals.difficulty = "very hard"
 
 
-func _on_ButtonCasual_button_up():
-	pass # Replace with function body.
+func _on_about_pressed():
+	aboutPopUp.popup_centered()

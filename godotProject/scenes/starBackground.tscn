@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://materials/starParticleMaterial.tres" type="Material" id=1]
+[ext_resource path="res://models/lowPolyEarth.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://scripts/rotateEarth.gd" type="Script" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id=2]
+material = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, -6.54547 ), 0.0, 0.0, 0, 0, Vector2( 1, 360 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.0090909 ), 0.0, 2.42545, 0, 0, Vector2( 0.30819, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.631465, 0.209091 ), -2.5958, -2.5958, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.44898, 0.900227, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="Curve" id=6]
+max_value = 200.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Animation" id=7]
+resource_name = "worldRotation"
+length = 4.0
+loop = true
+tracks/0/type = "transform"
+tracks/0/path = NodePath("world")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 10, 10, 10, 4, 1, 0, 0, 0, 0, 0, 0, 1, 10, 10, 10 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="StarParticles" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.8983, 0, -55.5431 )
+material_override = ExtResource( 1 )
+cast_shadow = 0
+amount = 2000
+preprocess = 30.0
+speed_scale = 0.01
+randomness = 0.32
+mesh = SubResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector3( 0, 0, 0 )
+spread = 138.03
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.46
+angular_velocity_curve = SubResource( 3 )
+scale_amount_random = 0.1
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 5 )
+anim_speed_curve = SubResource( 6 )
+
+[node name="world" type="CSGMesh" parent="."]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+mesh = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/worldRotation = SubResource( 7 )
