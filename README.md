@@ -27,7 +27,7 @@ The following picutre shows the "same" configuration</br>
 ## Screenshots
 ![Main Menu](https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/titleScreen.png)
 ![In Game start](https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/colorizedBlocks.png)
-![In Game finished](https://www.visittranas.com/wp-content/uploads/2018/03/placeholder.jpg)
+![In Game finished](https://github.com/CaptainDario/DaBlocksWorld/tree/master/slides/images/coloredGoalConfig.png)
 
 ### Credits
 
