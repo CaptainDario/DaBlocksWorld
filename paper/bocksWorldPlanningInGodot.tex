@@ -22,11 +22,11 @@
 \maketitle        
 
     \begin{abstract}
-        Answer set programming (ASP) is declarative programming paradigm in which a problem is modeled through prolog-like rules..
+        Answer set programming (ASP) is declarative programming paradigm in which a problem is modeled through prolog-like rules.
         The idea is to represent a problem by a logic program where terms of rules will be used to formulate the constraints of the problem.
         Clingo contains a state-of-the-art grounder and solver for ASP encodings
         which here will be utilized to solve the `Blocks World' planning problem.
-        We will combine this with the open source Game engine `Godot' to generate and solve the blocks world problem.
+        Clingo will be combined with the open source Game engine `Godot' to generate random blocks world instances and solve them.
     \end{abstract}
 
 
@@ -41,13 +41,15 @@
         Afterwards we will use the output of Clingo to rate the player's performance of solving the puzzle.\newline
         The first section of this paper will try to explain the Blocks World planning problem (BWPP) in a detailed way.
         The following section will explain the modifications we made to the BWPP and why we made them.
-        The third section will be targeted towards the Godot game engine we used to implement this project.
+        The third section will be targeted towards the Godot game engine we used to implement the interactive part of this project.
         Finally we want to talk about the algorithm which generates and solves BWPP configurations.
 
     \section{The Blocks World planning problem}
         The BWPP is a planning problem in which blocks need to be restacked onto each other.
-        These blocks are placed on stacks which are always placed on the ground.
+        Multiple blocks on top of each other are called a stack.
         The ground is the lowest point where a block can be placed.
+        A stack is always rooted on the ground.
+        This means that the lowest block of the stack is always on the ground.
         To this extend it is similar to the `towers of hanoi'-problem.
         However the blocks are all uniquely identifiable by numbers.
         An example of the BWPP is shown in figure \ref{startConfiguration}
@@ -60,9 +62,9 @@
         \end{figure}
 
         But the order in which those stacks are placed on the table does not matter.
-        Because of this there exist ambiguous configurations.
+        This leads to the existence of ambiguous blocks world configurations.
         Figure \ref{ambiguousGoalConfig} shows two different looking configurations.
-        However they both are same in regards to the BWPP because only the placement of the stacks is different.
+        However they are the same configuration in regards to the BWPP because only the placement of the stacks is different.
         
         \begin{figure}[h]
             \centering
@@ -73,7 +75,7 @@
 
         For each blocks world exists a start configuration and a goal configuration.
         The puzzle begins in the start configuration and should be transformed into the goal configuration only using legal moves.
-        Legal moves are moves which correspond to following rules:
+        Legal moves are moves which correspond to the following rules:
         \begin{itemize}
             \item at one time step only one move can be executed 
             \item a block can only be moved if it has no other blocks on top
@@ -97,25 +99,25 @@
         Godot is written in C/C++ and has designed its own scripting language: GodotScript (GDScript) \cite{godotWebsite}.
         But there is also a version of the game engine which enables the possibility to develop using C\#.
         This means one can develop in the Godot game engine using C/C++/C\#/GDScript.
-        Because the benefit of a higher performance with C/C++/C\# \cite{godotPerformanceComparison} is negligible in this project,
+        Because the benefit of a higher performance when using C/C++/C\# \cite{godotPerformanceComparison} is negligible in this project,
         GDScript was used.\newline
-        In the current implementation of DaBlocksWorld the ready made versions of Clingo for OSX, Windows and Linux \cite{clingoGithub} were used.
+        In the current implementation of this project the ready made versions of Clingo for OSX, Windows and Linux \cite{clingoGithub} were used.
         This however limits our target platform to these three.
         Godot provides an interface called GDNative.
-        This enables the possibility to use custom C++ code in your game.
+        This makes it possible to use custom C++ code in your game.
         Therefore it should be possible to use the source code of Clingo \cite{clingoGithub} and reach more platforms like android, iOS  
         
     \section{Game design decisions}
         Because this projects aims to provide a somewhat enjoyable gaming experience the standard BWPP got modified.
-        The modifications aim to make the game understandable without any explanations.
+        The modifications aim to make the game understandable with only a few explanations.
         Ideally somebody who does not know the BWPP understands the game without further explanation.
-        For better differentiation this project got the name `DaBlockWorld'.\newline
+        For better differentiation this project got the name `DaBlocksWorld'.\newline
         The first modification was that the maximum number of blocks which can be stacked onto each other got limited.
         This was necessary as the screen on which the game would be played is obviously limited in size.
-        For the same reason the maximum numbers of stacks which can be placed on the table got limited too.\newline
+        For the same reason the maximum number of stacks which can be placed on the table got limited too.\newline
         The next modification is due to the fact that the order of the block-stacks does not matter as shown in \ref{ambiguousGoalConfig}.
-        Therefore on the blocks were not subsequent numbers like $1 ... numberOfBlocks$ shown.
-        But rather numbers like $1 ... numberOfBlocks / numberOfStacks$.
+        Therefore the blocks were not labeled with subsequent numbers starting by $1$ till $ numberOfBlocks$,
+        rather with numbers from 1 to $ numberOfBlocks / numberOfStacks$.
         This modification was made with the intention to show that the placement of the stacks is unimportant.
         This however leads to the problem that one does not know which of the multiple numbers needs to be placed on which stack.
         As an example: if there are 3 stacks from 1 to 3 it is not clear which 2 needs to be placed on which 1.
@@ -128,12 +130,17 @@
             \includegraphics[width=10cm]{start_goal_config_colored.png}
             \caption{Changed BWPP and goal}
             \label{colorizedGoal}
-        \end{figure} 
+        \end{figure}
+        
+        Additionally the player can decide a level of difficulty he or she wants to play.
+        This difficulty changes the amount of blocks which will be given in the puzzle.
+        And also set the maximum bounds for the puzzle.
+        This means that the amount of stacks which can be placed on the board and also the height of those stacks change with the selected difficulty.
 
     \section{Generating and solving configurations}
         In the custom scripting language GodotScript a generator for BWPP configurations got developed.
         The main logical part of this generator can be found in listing \ref{generatingConfiguration}.
-        How the graphics work will be excluded entirely from this paper because it would go beyond the scope of this paper. \newline
+        How the graphics work will be excluded entirely from this paper because it would go beyond the scope of it. \newline
         `self.numOfBlocks' tells the game how many blocks should be placed in the current puzzle. 
         Now the generator creates a block according to this number (line 2).
         `generateRandomBlock()' returns a random Vector3 which is always inside of the bounds given by the selected difficulty.
@@ -168,10 +175,10 @@
         \end{lstlisting}
            
         In \cite{originalEncodingPaper} a solver for arbitrary BWPP configurations got developed.
-        For this project the encoding from this paper was used as a baseline and got extended to suit our modified problem.
-        In listing \ref{modification} one can see the modifications to the base encoding.\newline
-        $blocksOnGround/2$ simply keeps track of the amount of blocks $A$ which are on the ground at a specific point in time $t$.
-        $height/2$ counts for every block the height by recursively adding the blocks up.
+        For this project the encoding from this paper was used as a baseline and got extended to suit the modified problem.
+        In listing \ref{modification} one can see the modifications which where made to the base encoding.\newline
+        $blocksOnGround(A, t)$ simply keeps track of the amount of blocks $A$ which are on the ground at a specific point in time $t$.
+        $height(B, H, t)$ counts for every block $B$ the height $H$ at the point in time $t$ by recursively adding the blocks up.
 
         \begin{lstlisting}[caption=Addition to the encoding, label=modification]
             %DEFINE
@@ -183,47 +190,48 @@
         \end{lstlisting}
         
         Finally the board gets resized.
-        The size is exactly the size that the optimal plan found by clingo is executable given by $height/3$ and $blocksOnGround/2$.
+        The size is exactly the size that the optimal plan found by clingo can be executed by the player.
+        The height is the highest $H$ of all $height/3$ and the length is the highest $A$ of all $blocksOnGround/2$.
 
-\section{Conclusion}
-With DaBlocksWorld \cite{daBlocksWorldGithub} a game was developed only using open source tools and software.
-In the scripting language of Godot: `GDScript' a random generator for `Block World' puzzles was written.
-Using the Answer Set Programing paradigm a solver for every possible generated puzzle got utilized to solve this generated puzzle.
-While the player is solving the game he can always see the minimum numbers of moves necessary to solve this puzzle and also his own number of moves.\newline
-The source of this project is publicly available from \cite{daBlocksWorldGithub}.\newline
-With the power of an effective ASP solver and grounder new possibilities in the space of Game Design are possible. 
+    \section{Conclusion}
+        With DaBlocksWorld \cite{daBlocksWorldGithub} a game was developed only using open source tools and software.
+        In the scripting language of Godot: `GDScript' a random generator for `Block World' puzzles was written.
+        Using the Answer Set Programing paradigm a solver for every possible generated puzzle got utilized to solve this generated puzzle.
+        While the player is solving the game he can always see the minimum numbers of moves necessary to solve this puzzle and also his own number of moves.
+        The game and source of this project is available from \cite{daBlocksWorldGithub}.\newline
+        With the power of an effective ASP solver and grounder new possibilities in the space of Game Design are possible. 
 
 
-\begin{thebibliography}{8}
+    \begin{thebibliography}{8}
 
-    \bibitem{godotWebsite}
-        \url{https://godotengine.org/},
-        last access: 12.3.2020
+        \bibitem{godotWebsite}
+            \url{https://godotengine.org/},
+            last access: 12.3.2020
 
-    \bibitem{originalEncodingPaper}
-        Modeling and Language Extensions,
-        \url{https://aaai.org/ojs/index.php/aimagazine/article/view/2673},
-        author: Torsten Schaub, Martin Gebser,
-        last access: 14.3.2020
+        \bibitem{originalEncodingPaper}
+            Modeling and Language Extensions,
+            \url{https://aaai.org/ojs/index.php/aimagazine/article/view/2673},
+            author: Torsten Schaub, Martin Gebser,
+            last access: 14.3.2020
 
-    \bibitem{cApi}
-        \url{https://docs.godotengine.org/en/3.1/tutorials/plugins/gdnative/gdnative-cpp-example.html},
-        last access: 13.3.2020
+        \bibitem{cApi}
+            \url{https://docs.godotengine.org/en/3.1/tutorials/plugins/gdnative/gdnative-cpp-example.html},
+            last access: 13.3.2020
 
-    \bibitem{gdNativeExample}
-        \url{https://docs.godotengine.org/en/3.2/tutorials/plugins/gdnative/gdnative-c-example.html},
-        last access: 13.3.2020
+        \bibitem{gdNativeExample}
+            \url{https://docs.godotengine.org/en/3.2/tutorials/plugins/gdnative/gdnative-c-example.html},
+            last access: 13.3.2020
 
-    \bibitem{daBlocksWorldGithub}
-        \url{https://github.com/CaptainDario/DaBlocksWorld}
+        \bibitem{daBlocksWorldGithub}
+            \url{https://github.com/CaptainDario/DaBlocksWorld}
 
-    \bibitem{godotPerformanceComparison}
-        \url{https://github.com/cart/godot3-bunnymark#user-content-benchmark-run---february-22-2018},
-        last access: 12.3.2020
+        \bibitem{godotPerformanceComparison}
+            \url{https://github.com/cart/godot3-bunnymark#user-content-benchmark-run---february-22-2018},
+            last access: 12.3.2020
 
-    \bibitem{clingoGithub}
-        \url{https://github.com/potassco/clingo},
-        last access: 10.3.2020
+        \bibitem{clingoGithub}
+            \url{https://github.com/potassco/clingo},
+            last access: 10.3.2020
 
-\end{thebibliography}
+    \end{thebibliography}
 \end{document}
