@@ -1,11 +1,11 @@
 # DaBlocksWorld
 
-DaBlocksWorldPlanning is an implementation of the "Blocks World" planning Problem (https://en.wikipedia.org/wiki/Blocks_world) in the Godot Game Engine.
-In this interactive implementation a configuration gets randomly created and then solved by Clingo (https://potassco.org/clingo/).
+DaBlocksWorldPlanning is an implementation of the ["Blocks World" planning Problem](https://en.wikipedia.org/wiki/Blocks_world) in the Godot Game Engine.
+In this interactive implementation a configuration gets randomly created and then solved by [Clingo](https://potassco.org/clingo/).
 
 
 If you want to learn more about this implementation you can read the paper in the paper folder.
-If you are still interested after reading the paper above you can refer to the original paper: https://aaai.org/ojs/index.php/aimagazine/article/view/2673 .
+If you are still interested after reading the paper above you can refer to the [original paper](https://aaai.org/ojs/index.php/aimagazine/article/view/2673).
 
 
 If you just want to play the game, builds for Linux, Windows and Mac are available but only the Linux/Windows version are tested.
@@ -30,6 +30,5 @@ The following picutre shows the "same" configuration</br>
 
 ### Credits
 
-code/general design: Dario </br>
-earth model: CraigForster (https://www.blendswap.com/blend/18286) </br>
-music: Aviators - Infinity Awaits Us (https://www.youtube.com/watch?v=sisGSwT2eN0&t=259s)</br>
+earth model: [CraigForster](https://www.blendswap.com/blend/18286) </br>
+music: [Aviators - Infinity Awaits Us](https://www.youtube.com/watch?v=sisGSwT2eN0&t=259s)</br>
