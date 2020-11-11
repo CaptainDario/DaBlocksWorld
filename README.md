@@ -21,7 +21,7 @@ In DaBlocksWorld however the goal configuration is not random.
 The blocks allways need to be stacked with increasing numbers sorted by color. </br>
 
 <p align="center">
-  <img src="https://github.com/CaptainDario/DaBlocksWorld/blob/master/slides/images/start_goal_config_colored.png" width="500"/>
+  <img src="https://github.com/CaptainDario/DaBlocksWorld/blob/master/slides/images/start_goal_config_colored.png" width="750"/>
 </p>
 
 </br> However the placement of the stacks does not matter. 
@@ -33,9 +33,12 @@ The following picutre shows the "same" configuration</br>
 </p>
 
 ## Screenshots
-<img src="https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/titleScreen.png" width="500"/>
-<img src="https://raw.githubusercontent.com/CaptainDario/DaBlocksWorld/master/slides/images/coloredGoalConfig.png" width="500"/>
-
+<table>
+   <tr>
+    <th><img src="https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/titleScreen.png" height="300"/></th>
+    <th><img src="https://raw.githubusercontent.com/CaptainDario/DaBlocksWorld/master/slides/images/coloredGoalConfig.png" height="300"/></th>
+   </tr>
+</table>
 
 ### Credits
 
