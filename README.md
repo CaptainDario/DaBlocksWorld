@@ -25,7 +25,7 @@ The blocks allways need to be stacked with increasing numbers sorted by color. <
 </p>
 
 </br> However the placement of the stacks does not matter. 
-The following picutre shows the "same" configuration</br>
+The following picture shows the "same" configuration.</br>
 </br>
 
 <p align="center">
