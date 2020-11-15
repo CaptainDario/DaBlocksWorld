@@ -35,8 +35,8 @@ The following picture shows the "same" configuration.</br>
 ## Screenshots
 <table>
    <tr>
-    <th><img src="https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/titleScreen.png" height="300"/></th>
-    <th><img src="https://raw.githubusercontent.com/CaptainDario/DaBlocksWorld/master/slides/images/coloredGoalConfig.png" height="300"/></th>
+    <th><img src="https://github.com/CaptainDario/DaBlocksWorld/blob/master/paper/images/titleScreen.png" height="250"/></th>
+    <th><img src="https://raw.githubusercontent.com/CaptainDario/DaBlocksWorld/master/slides/images/coloredGoalConfig.png" height="250"/></th>
    </tr>
 </table>
 
